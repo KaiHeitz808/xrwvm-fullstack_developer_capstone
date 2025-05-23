@@ -8,4 +8,17 @@ function App() {
     </Routes>
   );
 }
+
+const App = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />  {/* Default home route */}
+        <Route path="/register" element={<Register />} />  {/* Register page */}
+      </Routes>
+    </Router>
+  );
+};
+
 export default App;
+
