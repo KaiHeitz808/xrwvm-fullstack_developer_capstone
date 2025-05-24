@@ -6,13 +6,18 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import logout
 from django.contrib import messages
 from datetime import datetime
+from django.http import JsonResponse, HttpResponse
 
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
 import logging
 import json
+#from .models import CarMake, CarModel
+
 from django.views.decorators.csrf import csrf_exempt
-#from .populate import initiate
+from django.contrib.auth import login, get_user_model
+
+from .populate import initiate
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -37,16 +42,10 @@ def login_user(request):
     return JsonResponse(data)
 
 # Create a `logout_request` view to handle sign out request
-from django.contrib.auth import logout
-from django.http import JsonResponse
-
-def logout_view(request):
-    if request.user.is_authenticated:
-        username = request.user.username
-        logout(request)
-        return JsonResponse({"username": username, "message": "Logged out successfully"})
-    
-    return JsonResponse({"error": "No active session"}, status=400)
+def logout_request(request):
+    logout(request)
+    data = {"userName":""}
+    return JsonResponse(data)
 
 # Create a `registration` view to handle sign up request
 @csrf_exempt
